@@ -7,7 +7,7 @@
         $scope.inProgress = true;
         $http({
             method: 'POST',
-            url: "#!/login",
+            url: "/Token",
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             transformRequest: function (obj) {
                 var str = [];
@@ -27,6 +27,6 @@
                 $scope.error = result.data.error_description;
                 $scope.inProgress = false;
             });
-    }
+    };
 }
 ]);

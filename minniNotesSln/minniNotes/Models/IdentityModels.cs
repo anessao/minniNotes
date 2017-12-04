@@ -4,6 +4,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using System.Data.Entity;
+using System.Collections.Generic;
 
 namespace minniNotes.Models
 {
@@ -12,6 +13,11 @@ namespace minniNotes.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+
+        public virtual List<Note> Notes { get; set; }
+        public virtual List<School> Schools { get; set; }
+        public virtual List<EnrolledClass> Classes { get; set; }
+        public virtual List<CardDeck> Decks { get; set; }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager, string authenticationType)
         {
