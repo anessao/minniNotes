@@ -29,7 +29,7 @@ namespace minniNotes.Controllers
             var db = new ApplicationDbContext();
             var notes = db.Notes;
 
-            var listOfNotes = db.Notes.Where(x => x.UserId.Id.Contains("UserId"));
+            var listOfNotes = db.Notes.Where(x => x.UserId.Id.Contains(UserId));
 
             return Request.CreateResponse(HttpStatusCode.OK, listOfNotes);
         }

@@ -1,8 +1,9 @@
 ﻿app.controller("loginController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
     $scope.username = "";
     $scope.password = "";
+    $scope.loginShow = true;
 
-    $scope.login = function () {
+    var loginUser = function () {
         $scope.error = "";
         $scope.inProgress = true;
         $http({
@@ -28,5 +29,34 @@
                 $scope.inProgress = false;
             });
     };
+
+
+    $scope.login = function () {
+        loginUser();
+    }
+
+    $scope.showRegisterFeilds = function () {
+        $scope.loginShow = false;
+    }
+
+    $scope.register = function () {
+        $scope.loginShow = true;
+        $scope.username = $scope.email;
+
+        registerUserInfo = {
+            Email: $scope.email,
+            Password: $scope.password,
+            ConfirmPassword: $scope.confirmPass
+        }
+
+        $http({
+            method: 'POST',
+            url: 'api/Account/Register',
+            data: registerUserInfo
+        })
+            .then(function (result) {
+                loginUser();
+            })
+    }
 }
 ]);

@@ -1,4 +1,9 @@
 ﻿<section>
     {{username}}
     {{userId}}
+    <div ng-repeat="note in notes">
+        <p>
+            <span>{{note.Title}}</span>
+        </p>
+    </div>
 </section>
