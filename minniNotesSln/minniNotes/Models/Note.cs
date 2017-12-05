@@ -11,6 +11,7 @@ namespace minniNotes.Models
         public string NoteText { get; set; }
         public DateTime DateCreated { get; set; }
         public DateTime DateLastEdited { get; set; }
+        public string Title { get; set; }
 
         public virtual ApplicationUser UserId { get; set; }
         public virtual CardDeck CardDeck { get; set; }

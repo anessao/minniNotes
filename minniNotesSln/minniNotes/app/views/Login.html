@@ -3,9 +3,10 @@
         <div class="container">
             <div class="columns is-centered">
                 <div class="column is-one-third-desktop is-10-mobile">
-                    <div class="box has-text-centered">
+                    <!--Login-->
+                    <div class="box has-text-centered" ng-show="loginShow">
                         <div ng-show="error" class="notification is-danger">
-                            {{error}} Login Working
+                            {{error}}
                         </div>
                         <div class="field">
                             <p class="control has-icons-left">
@@ -26,7 +27,44 @@
                         <div class="field">
                             <button class="button is-primary" ng-click="login()" ng-class="{'is-loading':inProgress}">Sign In</button>
                         </div>
-                    </div>
+                        <div class="field">
+                            <button class="button is-primary" ng-click="showRegisterFeilds()" ng-class="{'is-loading':inProgress}">Register</button>
+                        </div>
+                    </div> <!-- End Login -->
+
+                    <!--Register-->
+                    <div class="box has-text-centered" ng-show="!loginShow">
+                        <div ng-show="error" class="notification is-danger">
+                            {{error}}
+                        </div>
+                        <div class="field">
+                            <p class="control has-icons-left">
+                                <input ng-model="email" class="input" type="email" placeholder="Email">
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="field">
+                            <p class="control has-icons-left">
+                                <input ng-model="password" class="input" type="password" placeholder="Password">
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="field">
+                            <p class="control has-icons-left">
+                                <input ng-model="confirmPass" class="input" type="password" placeholder="Password">
+                                <span class="icon is-small is-left">
+                                    <i class="fa fa-lock"></i>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="field">
+                            <button class="button is-primary" ng-click="register()" ng-class="{'is-loading':inProgress}">Submit</button>
+                        </div>
+                    </div> <!-- End Register -->
                 </div>
             </div>
         </div>

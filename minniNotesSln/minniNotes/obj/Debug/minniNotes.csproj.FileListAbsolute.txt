@@ -105,3 +105,4 @@ C:\Users\Developer\projects\minniNotes\minniNotesSln\minniNotes\obj\Debug\minniN
 C:\Users\Developer\projects\minniNotes\minniNotesSln\minniNotes\obj\Debug\minniNotes.Migrations.initialMigration.resources
 C:\Users\Developer\projects\minniNotes\minniNotesSln\minniNotes\obj\Debug\minniNotes.csproj.GenerateResource.Cache
 C:\Users\Developer\projects\minniNotes\minniNotesSln\minniNotes\obj\Debug\minniNotes.Migrations.includeTables.resources
+C:\Users\Developer\projects\minniNotes\minniNotesSln\minniNotes\obj\Debug\minniNotes.Migrations.updateNoteModel.resources
