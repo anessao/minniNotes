@@ -1,1 +1,1 @@
-﻿var app = angular.module("MinniNotes", ["ngRoute"]);
+﻿var app = angular.module("MinniNotes", ["ngRoute", 'ngMaterial']);

@@ -9,13 +9,33 @@
         {
             templateUrl: "/app/views/Profile.html",
             controller: "profileController"
+        })
+        .when("/note/create", {
+            templateUrl: "/app/views/NoteAdd.html",
+            controller: "addNoteController"
+        })
+        .when("/note/all", {
+            templateUrl: "/app/views/NoteList.html",
+            controller: "listNoteController"
+        })
+        .when("/school/all", {
+            templateUrl: "/app/views/SchoolList.html",
+            controller: "listSchoolController"
+        })
+        .when("/class/all", {
+            templateUrl: "/app/views/ClassList.html",
+            controller: "listClassController"
+        })
+        .when("/test/create", {
+            templateUrl: "/app/views/CreateTest.html",
+            controller: "createTestController"
         });
 }]);
 
 
 app.run(["$rootScope", "$http", "$location", function ($rootScope, $http, $location) {
 
-    $rootScope.isLoggedIn = function () { return !!sessionStorage.getItem("token") }
+    $rootScope.isLoggedIn = function () { return !!sessionStorage.getItem("token"); };
 
     $rootScope.$on("$routeChangeStart", function (event, currRoute) {
         var anonymousPage = false;
@@ -35,4 +55,4 @@ app.run(["$rootScope", "$http", "$location", function ($rootScope, $http, $locat
 
     if (token)
         $http.defaults.headers.common["Authorization"] = `bearer ${token}`;
-}])
+}]);

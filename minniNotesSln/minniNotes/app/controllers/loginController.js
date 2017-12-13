@@ -21,7 +21,7 @@
             .then(function (result) {
                 sessionStorage.setItem('token', result.data.access_token);
                 $http.defaults.headers.common['Authorization'] = `bearer ${result.data.access_token}`;
-                $location.path("/profile");
+                $location.path("/note/create");
 
                 $scope.inProgress = false;
             }, function (result) {
@@ -33,11 +33,11 @@
 
     $scope.login = function () {
         loginUser();
-    }
+    };
 
     $scope.showRegisterFeilds = function () {
         $scope.loginShow = false;
-    }
+    };
 
     $scope.register = function () {
         $scope.loginShow = true;
@@ -47,7 +47,7 @@
             Email: $scope.email,
             Password: $scope.password,
             ConfirmPassword: $scope.confirmPass
-        }
+        };
 
         $http({
             method: 'POST',
@@ -56,7 +56,7 @@
         })
             .then(function (result) {
                 loginUser();
-            })
-    }
+            });
+    };
 }
 ]);

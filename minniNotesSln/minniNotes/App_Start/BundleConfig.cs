@@ -22,12 +22,17 @@ namespace minniNotes
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
                       "~/Scripts/angular.js",
                       "~/Scripts/angular-route.js",
+                      "~/Scripts/angular-animate.js",
+                      "~/Scripts/angular-aria.js",
+                      "~/Scripts/angular-material.js",
                       "~/app/app.js",
                       "~/app/appconfig.js").IncludeDirectory("~/app/controllers", "*.js", true));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                "~/Content/angular-material.css",
+                "~/Content/bootstrap.css",
+                      "~/Content/site.css"
+                      ));
         }
     }
 }

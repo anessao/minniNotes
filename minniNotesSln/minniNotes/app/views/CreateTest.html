@@ -1,0 +1,58 @@
+﻿<div class="col-md-6">
+    <p ng-if="chosenNote">{{chosenNote}}<button ng-click="clearChosenNote()">-</button></p>
+    <table class="table" ng-if="showNoteList">
+        <tbody>
+            <tr ng-repeat="note in notes | filter: chosenClass">
+                <td>{{note.Title}}</td>
+                <td><button ng-click="chooseNote(note)">+</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="col-md-6">
+    <div class="field">
+        <p class="control has-icons-left">
+            <select ng-model="newTest.School" placeholder="Select School">
+                <option ng-repeat="school in schools" value="{{school.Id}}">{{school.Name}}</option>
+            </select>
+        </p>
+    </div>
+    <div class="field">
+        <p class="control has-icons-left">
+            <select ng-model="chosenClass" placeholder="Select Class">
+                <option ng-repeat="class in classes | filter: {ClassInSession: true}" value="{{class.Id}}">{{class.Name}}</option>
+            </select>
+        </p>
+    </div>
+    <div class="field" ng-show="decksExist">
+        <p class="control has-icons-left">
+            <select ng-model="newTest.DeckId" ng-change="loadDeckCards(newTest.DeckId)" placeholder="Select School">
+                <option ng-repeat="deck in decks" value="{{deck.Id}}">{{deck.Title}}</option>
+            </select>
+        </p>
+        <button ng-click="showCreateDeck()">Create Deck</button>
+    </div>
+    <div class="field" ng-show="!decksExist">
+        <p class="control has-icons-left">
+            <input ng-model="newDeckTitle" class="input" type="text" placeholder="deck title">
+            <span class="icon is-small is-left">
+                <i class="fa fa-user"></i>
+            </span>
+        </p>
+        <button ng-click="createDeck()">Submit</button>
+    </div>
+    <div class="field">
+        <p class="control has-icons-left">
+            <textarea ng-model="newTest.Question" class="input" placeholder="Your Question">
+            </textarea>
+        </p>
+    </div>
+    <div class="field">
+        <p class="control has-icons-left">
+            <textarea ng-model="newTest.Answer" class="input" placeholder="Your Answer">
+            </textarea>
+        </p>
+    </div>
+    <button ng-click="createCard()">Add Card To Deck</button>
+    <button ng-show="doneCreatingCards" ng-click="doneCreatingCards()">Done Adding Cards</button>
+</div>

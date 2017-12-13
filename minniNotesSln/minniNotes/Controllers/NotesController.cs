@@ -33,6 +33,72 @@ namespace minniNotes.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK, listOfNotes);
         }
+        //Get all notes written by the user api/note/list
+        [HttpPost, Route("add")]
+        public HttpResponseMessage AddNewNote(Note noteItem)
+        {
+            var CurrentUserId = User.Identity.GetUserId();
+            CurrentUserId.ToString();
 
+            var db = new ApplicationDbContext();
+            var newNote = new Note
+            {
+                Title = noteItem.Title,
+                UserId = db.Users.Find(CurrentUserId),
+                DateCreated = DateTime.Now,
+                DateLastEdited = DateTime.Now,
+                CardDeck = null,
+                School = noteItem.School,
+                NoteText = noteItem.NoteText,
+                EnrolledClass = noteItem.EnrolledClass
+            };
+
+            db.Notes.Add(newNote);
+            db.SaveChanges();
+
+            return Request.CreateResponse(HttpStatusCode.Created, newNote);
+        }
+
+        [HttpGet, Route("view/{noteId}")]
+        public HttpResponseMessage GetNoteById(int noteId)
+        {
+            var db = new ApplicationDbContext();
+
+            var SelectedNote = db.Notes.Where(n => n.Id == noteId)
+                .Select(note => new Note
+                {
+                    Title = note.Title,
+                    DateCreated = note.DateCreated,
+                    DateLastEdited = note.DateLastEdited,
+                    CardDeck = note.CardDeck,
+                    School = note.School,
+                    NoteText = note.NoteText,
+                    EnrolledClass = note.EnrolledClass
+                });
+
+            return Request.CreateResponse(HttpStatusCode.OK, SelectedNote);
+        }
+
+        [HttpPut, Route("edit/{noteId}")]
+        public HttpResponseMessage UpdateNote(int noteId, Note updatedNote)
+        {
+            var db = new ApplicationDbContext();
+
+            var SelectedNote = db.Notes.Where(n => n.Id == noteId)
+                .Select(note => new Note
+                {
+                    Title = updatedNote.Title,
+                    DateCreated = note.DateCreated,
+                    DateLastEdited = updatedNote.DateLastEdited,
+                    CardDeck = updatedNote.CardDeck,
+                    School = updatedNote.School,
+                    NoteText = updatedNote.NoteText,
+                    EnrolledClass = updatedNote.EnrolledClass
+                }).FirstOrDefault();
+
+            db.SaveChanges();
+
+            return Request.CreateResponse(HttpStatusCode.OK, SelectedNote);
+        }
     }
 }
