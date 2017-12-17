@@ -5,6 +5,7 @@
             <tbody>
                 <tr ng-repeat="deck in decks">
                     <td>{{deck.Title}}</td>
+                    <td>{{deck.HighestScore}}%</td>
                     <td><button ng-click="playDeck(deck.Id)">Play</button></td>
                     <td><button ng-click="edit(deck.Id)">Edit</button></td>
                     <td><button ng-click="delete(deck.Id)">Delete</button></td>

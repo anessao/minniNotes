@@ -8,6 +8,10 @@
     $scope.percentScore = 0;
     $scope.showFinal = false;
 
+    //////////
+    // Get Cards by Deck Id - GET
+    //////////
+
     var chosenDeckId = $routeParams.deckId;
 
     var getCardsInDeck = function (deckid) {
@@ -33,7 +37,9 @@
     };
     getCardsInDeck(chosenDeckId);
 
-
+    //////////
+    // Load in question to be shown
+    //////////
     var testCounter = 0
     var questionId;
 
@@ -42,6 +48,10 @@
         $scope.Question = $scope.cardsInDeck[testCounter].Question;
         questionId = $scope.cardsInDeck[testCounter].Id;
     }
+
+    //////////
+    // Set random batch of answers
+    //////////
 
     var setAnswers = function () {
         var dataResults = $scope.cardsInDeck;
@@ -82,6 +92,10 @@
         $scope.answers = chosenAnswers;
     };
 
+    //////////
+    // Calculate and Submit Answers - PUT on final score
+    //////////
+
     var currentPoints = 0;
     var totalPoints = 0;
 
@@ -101,6 +115,13 @@
             loadQuestion();
             setAnswers();
         } else {
+            updateDeckScore($scope.percentScore);
+            if ($scope.percentScore < 60) {
+                $scope.message = "You Fail!"
+            } else {
+                $scope.message = "You Win!";
+            }
+            
             console.log("No more!");
             testCounter = 0;
             currentPoints = 0;
@@ -109,6 +130,18 @@
         }
     };
 
+    var updateDeckScore = function (score) {
+        $http.put(`api/deck/update`,
+            {
+                DeckId: chosenDeckId,
+                HighestScore: score
+            })
+            .then(function (result) {
+            console.log("result", result);
+        }).catch(function (error) {
+            console.log("put error: ", error);
+        });
+    };
 
 
 }]);

@@ -35,7 +35,7 @@ namespace minniNotes.Controllers
             return Request.CreateResponse(HttpStatusCode.Created, newDeck);
         }
 
-        //Get all notes written by the user api/note/list
+        //Get all notes written by the user api/deck/list
         [HttpGet, Route("list")]
         public HttpResponseMessage GetAllCardDecks()
         {
@@ -48,6 +48,19 @@ namespace minniNotes.Controllers
             var listOfCardDecks = db.Decks.Where(x => x.UserId.Id.Contains(UserId));
 
             return Request.CreateResponse(HttpStatusCode.OK, listOfCardDecks);
+        }
+
+        //Edit Score api/deck/update
+        [HttpPut, Route("update")]
+        public HttpResponseMessage UpdateScoreOnDeck(DeckScore updatedScore)
+        {
+            var db = new ApplicationDbContext();
+            var cardDeck = db.Decks.Where(x => x.Id.Equals(updatedScore.DeckId)).FirstOrDefault();
+
+            var newCardScore = cardDeck.HighestScore = updatedScore.HighestScore;
+            db.SaveChanges();
+
+            return Request.CreateResponse(HttpStatusCode.Accepted, newCardScore);
         }
     }
 }

@@ -1,11 +1,15 @@
-﻿<div>
-    <p>Current Score: {{score}}  |  {{cardCount}} out of {{cardAmount}}  |  current score: {{percentScore}}%</p>
+﻿<div ng-show="!showFinal">
+    <p>{{cardCount}} out of {{cardAmount}}  |  current score: {{percentScore}}%</p>
     <p>{{Question}}</p>
     <form>
         <div ng-repeat="answer in answers">
-            <input type="radio" name="answer" value={{answer.answerId}} ng-change="calculateAnswer(answer.points)"><span>{{answer.Text}}</span><br>
+            <input type="radio" name="answer" ng-model="chosenAnswer" value={{answer.answerId}} ng-change="calculateAnswer(answer.points)"><span>{{answer.Text}}</span><br>
         </div>
     </form>
 
     <button ng-click="submitAnswer()">Submit</button>
+</div>
+<div ng-show="showFinal">
+    Your Final Score is {{percentScore}}%
+    <p>{{message}}</p>
 </div>
