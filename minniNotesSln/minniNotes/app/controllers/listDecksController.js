@@ -24,6 +24,15 @@
     $scope.playDeck = function (deckId) {
         $location.url(`/deck/play/${deckId}`);
     };
+
+    $scope.delete = function (deckId) {
+        console.log("deleting");
+        $http.delete(`api/deck/remove/${deckId}`)
+            .then(function (result) {
+                console.log("working delete");
+                getDeckList();
+            })
+    }
     
 }
 ]);
