@@ -18,6 +18,10 @@
             templateUrl: "/app/views/NoteList.html",
             controller: "listNoteController"
         })
+        .when("/note/edit/:noteid", {
+            templateUrl: "/app/views/NoteEdit.html",
+            controller: "editNoteController"
+        })
         .when("/school/all", {
             templateUrl: "/app/views/SchoolList.html",
             controller: "listSchoolController"

@@ -35,7 +35,7 @@ namespace minniNotes.Controllers
         }
         //Get all notes written by the user api/note/list
         [HttpPost, Route("add")]
-        public HttpResponseMessage AddNewNote(Note noteItem)
+        public HttpResponseMessage AddNewNote(NoteToPost noteItem)
         {
             var CurrentUserId = User.Identity.GetUserId();
             CurrentUserId.ToString();
@@ -48,9 +48,9 @@ namespace minniNotes.Controllers
                 DateCreated = DateTime.Now,
                 DateLastEdited = DateTime.Now,
                 CardDeck = null,
-                School = noteItem.School,
+                School = db.Schools.Find(noteItem.SchoolId),
                 NoteText = noteItem.NoteText,
-                EnrolledClass = noteItem.EnrolledClass
+                EnrolledClass = db.Classes.Find(noteItem.ClassId)
             };
 
             db.Notes.Add(newNote);
@@ -64,41 +64,41 @@ namespace minniNotes.Controllers
         {
             var db = new ApplicationDbContext();
 
-            var SelectedNote = db.Notes.Where(n => n.Id == noteId)
-                .Select(note => new Note
-                {
-                    Title = note.Title,
-                    DateCreated = note.DateCreated,
-                    DateLastEdited = note.DateLastEdited,
-                    CardDeck = note.CardDeck,
-                    School = note.School,
-                    NoteText = note.NoteText,
-                    EnrolledClass = note.EnrolledClass
-                });
+            var SelectedNote = db.Notes.Where(n => n.Id == noteId).FirstOrDefault();
 
             return Request.CreateResponse(HttpStatusCode.OK, SelectedNote);
         }
 
         [HttpPut, Route("edit/{noteId}")]
-        public HttpResponseMessage UpdateNote(int noteId, Note updatedNote)
+        public HttpResponseMessage UpdateNote(int noteId, NoteToPost updatedNote)
         {
             var db = new ApplicationDbContext();
+            var note = db.Notes.Where(x => x.Id.Equals(noteId)).FirstOrDefault();
 
-            var SelectedNote = db.Notes.Where(n => n.Id == noteId)
-                .Select(note => new Note
-                {
-                    Title = updatedNote.Title,
-                    DateCreated = note.DateCreated,
-                    DateLastEdited = updatedNote.DateLastEdited,
-                    CardDeck = updatedNote.CardDeck,
-                    School = updatedNote.School,
-                    NoteText = updatedNote.NoteText,
-                    EnrolledClass = updatedNote.EnrolledClass
-                }).FirstOrDefault();
+            note.Title = updatedNote.Title;
+            note.DateCreated = note.DateCreated;
+            note.DateLastEdited = DateTime.Now;
+            note.CardDeck = null;
+            note.School = db.Schools.Find(updatedNote.SchoolId);
+            note.NoteText = updatedNote.NoteText;
+            note.EnrolledClass = db.Classes.Find(updatedNote.ClassId);
 
             db.SaveChanges();
 
-            return Request.CreateResponse(HttpStatusCode.OK, SelectedNote);
+            return Request.CreateResponse(HttpStatusCode.OK, note);
+        }
+
+        [HttpDelete, Route("remove/{noteid}")]
+        public HttpResponseMessage DeleteNote(int noteid)
+        {
+            var db = new ApplicationDbContext();
+            
+            var note = db.Notes.Where(x => x.Id.Equals(noteid)).FirstOrDefault();
+
+            db.Notes.Remove(note);
+            db.SaveChanges();
+
+            return Request.CreateResponse(HttpStatusCode.Accepted);
         }
     }
 }

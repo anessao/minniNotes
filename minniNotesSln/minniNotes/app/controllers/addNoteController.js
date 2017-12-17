@@ -47,9 +47,9 @@
         $http.post("/api/note/add",
             {
                 Title: $scope.newNote.Title,
-                School: $scope.newNote.School,
+                SchoolId: $scope.newNote.SchoolId,
                 NoteText: $scope.newNote.NoteText,
-                EnrolledClass: $scope.newNote.EnrolledClass
+                ClassId: $scope.newNote.EnrolledClassId
             })
             .then(function (result) {
                 console.log(result);

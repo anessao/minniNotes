@@ -260,6 +260,7 @@
     <Compile Include="Models\EnrolledClassToCreate.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Note.cs" />
+    <Compile Include="Models\NoteToPost.cs" />
     <Compile Include="Models\School.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
@@ -286,6 +287,7 @@
     <Content Include="app\views\Login.html" />
     <Content Include="app\views\navbar.html" />
     <Content Include="app\views\NoteAdd.html" />
+    <Content Include="app\views\NoteEdit.html" />
     <Content Include="app\views\NoteList.html" />
     <Content Include="app\views\PlayTest.html" />
     <Content Include="app\views\Profile.html" />

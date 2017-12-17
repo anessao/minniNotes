@@ -5,9 +5,10 @@
             <tbody>
                 <tr ng-repeat="note in notes">
                     <td>{{note.Title}}</td>
-                    <td>{{note.School}}</td>
-                    <td>{{note.EnrolledClass}}</td>
-                    <td><button ng-click="goToEditView(note.Id)">Edit</button></td>
+                    <td>{{note.School.Name}}</td>
+                    <td>{{note.EnrolledClass.Name}}</td>
+                    <td><button ng-click="goToEditView(note.Id)">View Details</button></td>
+                    <td><button ng-click="delete(note.Id)">Delete</button></td>
                 </tr>
             </tbody>
         </table>

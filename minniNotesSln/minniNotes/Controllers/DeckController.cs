@@ -85,8 +85,6 @@ namespace minniNotes.Controllers
             }
             var cardDeck = db.Decks.Where(x => x.Id.Equals(deckid)).FirstOrDefault();
 
-            
-
             db.Decks.Remove(cardDeck);
             db.SaveChanges();
 
