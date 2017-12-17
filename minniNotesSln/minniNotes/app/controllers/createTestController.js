@@ -6,6 +6,7 @@
     $scope.decks;
     $scope.chosenNote;
     $scope.cardsInDeck;
+    $scope.chosenDeckTitle;
 
     $scope.doneCreatingCards = false;
     $scope.decksExist = true;
@@ -58,6 +59,10 @@
         getCardsInDeck(deck);
     };
 
+    $scope.deleteCardFromDeck = function (cardid) {
+
+    }
+
     var getCardsInDeck = function (deckid) {
         $http.get(`/api/cards/list/${deckid}`)
             .then(function (result) {
@@ -71,6 +76,9 @@
                     });
                 }
                 $scope.cardsInDeck = listOfCardsInDeck;
+                if (listOfCardsInDeck.length > 0) {
+                    $scope.chosenDeckTitle = listOfCardsInDeck[0].Deck.Title;
+                }
                 console.log($scope.cardsInDeck);
             })
     };

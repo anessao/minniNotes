@@ -56,3 +56,19 @@
     <button ng-click="createCard()">Add Card To Deck</button>
     <button ng-show="doneCreatingCards" ng-click="doneCreatingCards()">Done Adding Cards</button>
 </div>
+<div class="container">
+    <div class="panel">
+        <div class="panel-heading">
+            {{chosenDeckTitle}}
+        </div>
+        <div class="panel-body">
+            <div class="col-sm-4" ng-repeat="card in cardsInDeck">
+                <div class="thumbnail">
+                    <span><b>Q: </b></span> {{card.Question}}</b>
+                    <span><b>A: </b></span> {{card.Answer}}</b>
+                    <button ng-click="deleteCardFromDeck()">Remove From Deck</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

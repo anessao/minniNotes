@@ -29,6 +29,14 @@
         .when("/test/create", {
             templateUrl: "/app/views/CreateTest.html",
             controller: "createTestController"
+        })
+        .when("/test/choose", {
+            templateUrl: "app/views/DeckList.html",
+            controller: "listDecksController"
+        })
+        .when("/deck/play/:deckId", {
+            templateUrl: "app/views/PlayTest.html",
+            controller: "playTestController"
         });
 }]);
 

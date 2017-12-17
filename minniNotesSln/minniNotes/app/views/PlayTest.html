@@ -1,0 +1,11 @@
+﻿<div>
+    <p>Current Score: {{score}}  |  {{cardCount}} out of {{cardAmount}}  |  current score: {{percentScore}}%</p>
+    <p>{{Question}}</p>
+    <form>
+        <div ng-repeat="answer in answers">
+            <input type="radio" name="answer" value={{answer.answerId}} ng-change="calculateAnswer(answer.points)"><span>{{answer.Text}}</span><br>
+        </div>
+    </form>
+
+    <button ng-click="submitAnswer()">Submit</button>
+</div>

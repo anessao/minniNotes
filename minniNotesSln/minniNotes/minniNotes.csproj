@@ -272,9 +272,11 @@
     <Content Include="app\controllers\createTestController.js" />
     <Content Include="app\controllers\editNoteController.js" />
     <Content Include="app\controllers\listClassController.js" />
+    <Content Include="app\controllers\listDecksController.js" />
     <Content Include="app\controllers\listNoteController.js" />
     <Content Include="app\controllers\listSchoolController.js" />
     <Content Include="app\controllers\loginController.js" />
+    <Content Include="app\controllers\playTestController.js" />
     <Content Include="app\controllers\profileController.js" />
     <Content Include="app\views\CreateTest.html" />
     <Content Include="app\views\ClassList.html" />
@@ -284,6 +286,7 @@
     <Content Include="app\views\navbar.html" />
     <Content Include="app\views\NoteAdd.html" />
     <Content Include="app\views\NoteList.html" />
+    <Content Include="app\views\PlayTest.html" />
     <Content Include="app\views\Profile.html" />
     <Content Include="app\views\SchoolList.html" />
     <Content Include="Areas\HelpPage\HelpPage.css" />
