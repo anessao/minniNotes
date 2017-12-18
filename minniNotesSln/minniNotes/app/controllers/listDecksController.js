@@ -1,5 +1,8 @@
 ﻿app.controller("listDecksController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
     $scope.decks;
+    $scope.newDeckTitle;
+    $scope.showAddDeck = false;
+
 
     var getDeckList = function () {
         $http.get("/api/deck/list")
@@ -33,6 +36,22 @@
                 getDeckList();
             })
     }
+
+    $scope.showCreateDeck = function () {
+        $scope.showAddDeck = true;
+    }
+
+    $scope.createDeck = function () {
+        $http.post("/api/deck/add",
+            {
+                Title: $scope.newDeckTitle
+            })
+            .then(function (result) {
+                console.log(result);
+                getDeckList();
+                $scope.showAddDeck = false;
+            }).catch(error => console.log(error));
+    };
     
 }
 ]);

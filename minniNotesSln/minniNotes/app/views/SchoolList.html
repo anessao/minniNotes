@@ -1,13 +1,24 @@
 ﻿<section>
     <div class="panel panel-default">
-        <div class="panel-heading">Your Schools</div>
+        <div class="panel-heading">Your Active Schools</div>
         <table class="table">
             <tbody>
-                <tr ng-repeat="school in schools">
+                <tr ng-repeat="school in schools | filter: {isActive: true}">
                     <td>{{school.Name}}</td>
                     <td>{{school.State}}</td>
-                    <td>{{school.isActive}}</td>
-                    <td><button ng-click="goToEditView(school.Id)">Edit</button></td>
+                    <td><input type="checkbox" name="" ng-checked="school.isActive" ng-model="school.isActive" ng-change="inputChange(school)" /></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">Your Inactive Schools</div>
+        <table class="table">
+            <tbody>
+                <tr ng-repeat="school in schools | filter: {isActive: false}">
+                    <td>{{school.Name}}</td>
+                    <td>{{school.State}}</td>
+                    <td><input type="checkbox" name="" ng-checked="school.isActive" ng-model="school.isActive" ng-change="inputChange(school)" /></td>
                 </tr>
             </tbody>
         </table>

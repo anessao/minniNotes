@@ -1,4 +1,4 @@
-﻿<div>
+﻿<div ng-show="!showAddDeck">
     <div class="panel panel-default">
         <div class="panel-heading">Chose a Deck</div>
         <table class="table">
@@ -13,4 +13,14 @@
             </tbody>
         </table>
     </div>
+    <button ng-click="showCreateDeck()">Create New Deck</button>
+</div>
+<div class="field" ng-show="showAddDeck">
+    <p class="control has-icons-left">
+        <input ng-model="newDeckTitle" class="input" type="text" placeholder="deck title">
+        <span class="icon is-small is-left">
+            <i class="fa fa-user"></i>
+        </span>
+    </p>
+    <button ng-click="createDeck()">Submit</button>
 </div>

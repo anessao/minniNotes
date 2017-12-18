@@ -50,5 +50,17 @@ namespace minniNotes.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK, listOfSchools);
         }
+
+        [HttpPut, Route("update")]
+        public HttpResponseMessage UpdateActiveStatus(SchoolActiveStatus updatedSchool)
+        {
+            var db = new ApplicationDbContext();
+            var school = db.Schools.Where(x => x.Id.Equals(updatedSchool.schoolId)).FirstOrDefault();
+
+            var newSchool = school.isActive = updatedSchool.isActive;
+            db.SaveChanges();
+
+            return Request.CreateResponse(HttpStatusCode.Accepted, newSchool);
+        }
     }
 }

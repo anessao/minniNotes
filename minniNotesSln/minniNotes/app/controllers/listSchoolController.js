@@ -34,5 +34,18 @@
                 getSchoolList();
             }).catch(error => console.log(error));
     }
+
+    $scope.inputChange = function (school) {
+            $http.put(`api/school/update`,
+                {
+                    schoolId: school.Id,
+                    isActive: school.isActive
+                })
+                .then(function (result) {
+                    getSchoolList();
+                }).catch(function (error) {
+                    console.log("put error: ", error);
+                });
+    }
 }
 ]);

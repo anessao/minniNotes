@@ -6,7 +6,6 @@
                 <tr ng-repeat="class in classes | filter: {ClassInSession: true}">
                     <td>{{class.Name}}</td>
                     <td>{{class.School.Name}}</td>
-                    <td><button ng-click="goToEditView(class.Id)">Edit</button></td>
                 </tr>
             </tbody>
         </table>
@@ -18,7 +17,6 @@
                 <tr ng-repeat="class in classes | filter: {ClassInSession: false}">
                     <td>{{class.Name}}</td>
                     <td>{{class.School.Name}}</td>
-                    <td><button ng-click="goToEditView(class.Id)">Edit</button></td>
                 </tr>
             </tbody>
         </table>
