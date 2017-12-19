@@ -7,11 +7,11 @@
                     <td>{{note.Title}}</td>
                     <td>{{note.School.Name}}</td>
                     <td>{{note.EnrolledClass.Name}}</td>
-                    <td><button ng-click="goToEditView(note.Id)">View Details</button></td>
-                    <td><button ng-click="delete(note.Id)">Delete</button></td>
+                    <td><button class="btn btn-info" ng-click="goToEditView(note.Id)"><span class="glyphicon glyphicon-file"></span></button></td>
+                    <td><button class="btn btn-danger" ng-click="delete(note.Id)"><span class="glyphicon glyphicon-trash"></span></button></td>
                 </tr>
             </tbody>
         </table>
     </div>
-    <button ng-click="goToCreateNote()">Create Note</button>
+    <button class="btn btn-success" ng-click="goToCreateNote()">Create Note</button>
 </section>

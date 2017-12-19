@@ -1,4 +1,4 @@
-﻿app.controller("createTestController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
+﻿app.controller("createTestController", ["$rootScope", "$scope", "$http", "$location", function ($rootScope, $scope, $http, $location) {
     $scope.notes;
     $scope.schools;
     $scope.classes;
@@ -7,6 +7,8 @@
     $scope.chosenNote;
     $scope.cardsInDeck;
     $scope.chosenDeckTitle;
+
+    var chosenDeckId;
 
     $scope.doneCreatingCards = false;
     $scope.decksExist = true;
@@ -60,10 +62,14 @@
     };
 
     $scope.deleteCardFromDeck = function (cardid) {
-
+        $http.delete(`api/cards/remove/${cardid}`)
+            .then(function (result) {
+                getCardsInDeck(chosenDeckId);
+            });
     }
 
     var getCardsInDeck = function (deckid) {
+        chosenDeckId = deckid;
         $http.get(`/api/cards/list/${deckid}`)
             .then(function (result) {
                 var dataResults = result.data;
@@ -159,5 +165,11 @@
         }).catch(function (error) {
             console.log(error);
         });
+
+    if ($location.path() === '/test/edit') {
+        chosenDeckId = $rootScope.deck;
+        $scope.newTest.DeckId = chosenDeckId;
+        getCardsInDeck(chosenDeckId);
+    }
 
 }]);

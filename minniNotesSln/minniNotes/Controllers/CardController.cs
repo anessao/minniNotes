@@ -50,5 +50,18 @@ namespace minniNotes.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK, listOfCardsByDeck);
         }
+
+        [HttpDelete, Route("remove/{cardid}")]
+        public HttpResponseMessage DeleteNote(int cardid)
+        {
+            var db = new ApplicationDbContext();
+
+            var card = db.Cards.Where(x => x.Id.Equals(cardid)).FirstOrDefault();
+
+            db.Cards.Remove(card);
+            db.SaveChanges();
+
+            return Request.CreateResponse(HttpStatusCode.Accepted);
+        }
     }
 }

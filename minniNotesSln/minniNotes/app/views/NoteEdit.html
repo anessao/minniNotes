@@ -1,38 +1,32 @@
 ﻿<div ng-show="!isInEdit">
     <h3>{{chosenNoteObject.Title}}</h3>
-    <p>{{chosenNoteObject.School.Name}}  |  {{chosenNoteObject.EnrolledClass.Name}}</p>
+    <h5>{{chosenNoteObject.School.Name}}  |  {{chosenNoteObject.EnrolledClass.Name}}</h5>
     <p>{{chosenNoteObject.dateCreated}}</p>
+    <br />
     <p>{{chosenNoteObject.NoteText}}</p>
-    <button ng-click="showEditMode()">Edit</button>
+    <button class="btn btn-info" ng-click="showEditMode()">Edit</button>
 </div>
 <div ng-show="isInEdit">
-    <div class="field">
-        <p class="control has-icons-left">
-            <input ng-model="chosenNoteObject.Title" class="input" type="text" ng-placeholder="chosenNoteObject.Title">
-            <span class="icon is-small is-left">
-                <i class="fa fa-user"></i>
-            </span>
-        </p>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Title</span>
+        <input type="text" class="form-control" ng-model="chosenNoteObject.Title" aria-describedby="basic-addon1" ng-placeholder="chosenNoteObject.Title">
     </div>
-    <div class="field">
-        <p class="control has-icons-left">
-            <select ng-model="schoolId">
-                <option ng-repeat="school in schools" value="{{school.Id}}">{{school.Name}}</option>
-            </select>
-        </p>
+
+    <div class="form-group">
+        <label for="schoolid">School:</label>
+        <select id="schoolid" class="form-control" ng-model="schoolId" placeholder="Select School">
+            <option ng-repeat="school in schools" value="{{school.Id}}">{{school.Name}}</option>
+        </select>
     </div>
-    <div class="field">
-        <p class="control has-icons-left">
-            <select ng-model="classId" placeholder="Select Class">
-                <option ng-repeat="class in classes | filter: {ClassInSession: true}" value="{{class.Id}}">{{class.Name}}</option>
-            </select>
-        </p>
+    <div class="form-group">
+        <label for="classid">Class:</label>
+        <select id="classid" class="form-control" ng-model="classId" placeholder="Select Class">
+            <option ng-repeat="class in classes | filter: {ClassInSession: true}" value="{{class.Id}}">{{class.Name}}</option>
+        </select>
     </div>
-    <div class="field">
-        <p class="control has-icons-left">
-            <textarea ng-model="chosenNoteObject.NoteText" class="input" placeholder="Your Notes">
+    <div class="form-group">
+        <textarea class="form-control" rows="15" ng-model="chosenNoteObject.NoteText" ng-placeholder="chosenNoteObject.NoteText">
             </textarea>
-        </p>
     </div>
-    <button ng-click="sendUpdate()">Update Note</button>
+    <button class="btn btn-success" ng-click="sendUpdate()">Update Note</button>
 </div>

@@ -31,6 +31,7 @@
             })
             .then(function (result) {
                 console.log(result);
+                $scope.newSchool = {};
                 getSchoolList();
             }).catch(error => console.log(error));
     }
@@ -43,6 +44,7 @@
                 })
                 .then(function (result) {
                     getSchoolList();
+
                 }).catch(function (error) {
                     console.log("put error: ", error);
                 });

@@ -1,10 +1,16 @@
 ﻿<div class="col-md-6">
-    <p ng-if="chosenNote">{{chosenNote}}<button ng-click="clearChosenNote()">-</button></p>
+    <div ng-if="chosenNote">
+        <div style="height: 50rem; overflow: scroll;">
+            <p>{{chosenNote}}</p>
+        </div>
+        <button class="btn btn-danger" ng-click="clearChosenNote()">-</button>
+    </div>
+
     <table class="table" ng-if="showNoteList">
         <tbody>
             <tr ng-repeat="note in notes | filter: chosenClass">
                 <td>{{note.Title}}</td>
-                <td><button ng-click="chooseNote(note)">+</button></td>
+                <td><button class="btn btn-info" ng-click="chooseNote(note)">+</button></td>
             </tr>
         </tbody>
     </table>
@@ -66,7 +72,7 @@
                 <div class="thumbnail">
                     <span><b>Q: </b></span> {{card.Question}}</b>
                     <span><b>A: </b></span> {{card.Answer}}</b>
-                    <button ng-click="deleteCardFromDeck()">Remove From Deck</button>
+                    <button class="pull-right btn btn-danger" ng-click="deleteCardFromDeck(card.Id)"><span class="glyphicon glyphicon-trash"></span></button>
                 </div>
             </div>
         </div>

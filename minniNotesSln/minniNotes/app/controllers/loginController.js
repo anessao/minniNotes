@@ -1,7 +1,21 @@
-﻿app.controller("loginController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
+﻿app.controller("loginController", ["$rootScope", "$scope", "$http", "$location", "$window", function ($rootScope, $scope, $http, $location, $window) {
     $scope.username = "";
     $scope.password = "";
-    $scope.loginShow = true;
+    $scope.loginShow = true
+
+    var logout = function () {
+        $http.post('api/Account/Logout').then(function (result) {
+            $window.sessionStorage.user = null;
+            $rootScope.username = null;
+            $location.url('/login');
+        }).catch(function (error) {
+            console.log("logout error");
+        });
+    }
+    if ($location.path() === '/logout') {
+        logout();
+    }
+
 
     var loginUser = function () {
         $scope.error = "";
@@ -21,15 +35,15 @@
             .then(function (result) {
                 sessionStorage.setItem('token', result.data.access_token);
                 $http.defaults.headers.common['Authorization'] = `bearer ${result.data.access_token}`;
+                $window.sessionStorage.username = result.data.userName;
+                $rootScope.username = result.data.userName;
                 $location.path("/note/create");
-
                 $scope.inProgress = false;
             }, function (result) {
                 $scope.error = result.data.error_description;
                 $scope.inProgress = false;
             });
     };
-
 
     $scope.login = function () {
         loginUser();

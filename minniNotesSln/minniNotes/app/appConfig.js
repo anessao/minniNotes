@@ -5,6 +5,10 @@
             templateUrl: "/app/views/Login.html",
             controller: "loginController"
         })
+        .when("/logout", {
+            templateUrl: "/app/views/Login.html",
+            controller: "loginController"
+        })
         .when("/profile",
         {
             templateUrl: "/app/views/Profile.html",
@@ -34,6 +38,10 @@
             templateUrl: "/app/views/CreateTest.html",
             controller: "createTestController"
         })
+        .when("/test/edit", {
+            templateUrl: "/app/views/CreateTest.html",
+            controller: "createTestController"
+        })
         .when("/test/choose", {
             templateUrl: "app/views/DeckList.html",
             controller: "listDecksController"
@@ -45,7 +53,7 @@
 }]);
 
 
-app.run(["$rootScope", "$http", "$location", function ($rootScope, $http, $location) {
+app.run(["$rootScope", "$http", "$location", "$window", function ($rootScope, $http, $location, $window) {
 
     $rootScope.isLoggedIn = function () { return !!sessionStorage.getItem("token"); };
 
@@ -65,6 +73,8 @@ app.run(["$rootScope", "$http", "$location", function ($rootScope, $http, $locat
 
     var token = sessionStorage.getItem("token");
 
-    if (token)
+    if (token) {
         $http.defaults.headers.common["Authorization"] = `bearer ${token}`;
+        $rootScope.username = $window.sessionStorage.username;
+    }
 }]);

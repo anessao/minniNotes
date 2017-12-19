@@ -1,4 +1,4 @@
-﻿app.controller("listDecksController", ["$scope", "$http", "$location", function ($scope, $http, $location) {
+﻿app.controller("listDecksController", ["$rootScope", "$scope", "$http", "$location", function ($rootScope, $scope, $http, $location) {
     $scope.decks;
     $scope.newDeckTitle;
     $scope.showAddDeck = false;
@@ -52,6 +52,13 @@
                 $scope.showAddDeck = false;
             }).catch(error => console.log(error));
     };
+
+    $scope.edit = function (deckid) {
+        console.log(deckid);
+        $rootScope.deck = deckid;
+        $location.url('/test/edit');
+        console.log($rootScope.deck);
+    }
     
 }
 ]);

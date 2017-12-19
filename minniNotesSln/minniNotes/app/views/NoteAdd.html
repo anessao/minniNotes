@@ -1,32 +1,25 @@
-﻿<section>
-Add A Note:
-    <div class="field">
-        <p class="control has-icons-left">
-            <input ng-model="newNote.Title" class="input" type="text" placeholder="Title">
-            <span class="icon is-small is-left">
-                <i class="fa fa-user"></i>
-            </span>
-        </p>
+﻿<section class="container">
+    <h3>Add a note:</h3>
+    <div class="input-group">
+        <span class="input-group-addon" id="basic-addon1">Title</span>
+        <input type="text" class="form-control" ng-model="newNote.Title" aria-describedby="basic-addon1">
     </div>
-    <div class="field">
-        <p class="control has-icons-left">
-            <select ng-model="newNote.SchoolId" placeholder="Select School">
-                <option ng-repeat="school in schools" value="{{school.Id}}">{{school.Name}}</option>
-            </select>
-        </p>
+
+    <div class="form-group">
+        <label for="schoolid">School:</label>
+        <select id="schoolid" class="form-control" ng-model="newNote.SchoolId" placeholder="Select School">
+            <option ng-repeat="school in schools" value="{{school.Id}}">{{school.Name}}</option>
+        </select>
     </div>
-    <div class="field">
-        <p class="control has-icons-left">
-            <select ng-model="newNote.EnrolledClassId" placeholder="Select Class">
-                <option ng-repeat="class in classes | filter: {ClassInSession: true}" value="{{class.Id}}">{{class.Name}}</option>
-            </select>
-        </p>
+    <div class="form-group">
+        <label for="classid">Class:</label>
+        <select id="classid" class="form-control" ng-model="newNote.EnrolledClassId" placeholder="Select Class">
+            <option ng-repeat="class in classes | filter: {ClassInSession: true}" value="{{class.Id}}">{{class.Name}}</option>
+        </select>
     </div>
-    <div class="field">
-        <p class="control has-icons-left">
-            <textarea ng-model="newNote.NoteText" class="input" placeholder="Your Notes">
+    <div class="form-group">
+            <textarea class="form-control" rows="15" ng-model="newNote.NoteText" placeholder="Your Notes">
             </textarea>
-        </p>
     </div>
     <button ng-click="createNote()">Create Note</button>
 </section>
